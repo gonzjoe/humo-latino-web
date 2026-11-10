@@ -14,3 +14,7 @@ dist/
 .env
 .env.*
 !.env.example
+
+# Deployment archives
+*.zip
+

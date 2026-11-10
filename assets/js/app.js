@@ -341,7 +341,7 @@ function view_home(){
     <canvas class="hero-fx" aria-hidden="true"></canvas>
     <div class="hero-vignette"></div>
     <div class="hero-center">
-      <img class="hero-logo" src="assets/logo-hero.png" alt="Humo Latino">
+      <img class="hero-logo" src="assets/img/logo-hero.png" alt="Humo Latino">
       <div class="hero-ctas">
         <a href="#/catalogo" class="btn btn-primary">Ver catálogo${ARROW_ICON}</a>
         <a href="${waLink('Hola, quiero conocer más sobre los productos de Humo Latino.')}" target="_blank" rel="noopener" class="btn btn-whatsapp">${WA_ICON} Hablar por WhatsApp</a>
@@ -362,7 +362,7 @@ function view_home(){
 
   <section class="section" style="padding-top:0">
     <div class="container about-wrap">
-      <div class="logo-big"><img src="assets/logo-humo-latino.png" alt="Humo Latino"></div>
+      <div class="logo-big"><img src="assets/img/logo-humo-latino.png" alt="Humo Latino"></div>
       <div>
         <span class="eyebrow">Humo Latino</span>
         <h2 style="font-size:32px;margin:14px 0 16px;">Iluminación, humo y efectos con más de 15 años de experiencia</h2>
@@ -662,7 +662,7 @@ function view_nosotros(){
   app.innerHTML = `
   <div class="section">
     <div class="container about-wrap">
-      <div class="logo-big"><img src="assets/logo-humo-latino.png" alt="Humo Latino"></div>
+      <div class="logo-big"><img src="assets/img/logo-humo-latino.png" alt="Humo Latino"></div>
       <div>
         <span class="eyebrow">Nosotros</span>
         <h2 style="font-size:32px;margin:14px 0 16px;">Más de 15 años dando luz a los eventos</h2>
@@ -728,7 +728,7 @@ function contactSectionHTML(standalone){
           <a class="btn btn-whatsapp btn-block" style="margin-top:20px;" target="_blank" rel="noopener" href="${waLink('Hola, estoy interesado en el catálogo de Humo Latino. Quisiera conocer disponibilidad y realizar una consulta.')}">${WA_ICON} Hablar por WhatsApp</a>
         </div>
         <div class="qr-card">
-          <img src="assets/qr-instagram.png" alt="Código QR Instagram Humo Latino" loading="lazy" style="border-radius:8px;background:#fff;padding:6px;width:180px;height:180px;margin:0 auto 14px;object-fit:contain;display:block;">
+          <img src="assets/img/qr-instagram.png" alt="Código QR Instagram Humo Latino" loading="lazy" style="border-radius:8px;background:#fff;padding:6px;width:180px;height:180px;margin:0 auto 14px;object-fit:contain;display:block;">
           <strong style="font-family:var(--font-display);font-size:16px;">Síguenos en Instagram</strong>
           <p>Escanea el código o toca el botón para llegar directo a ${IG_HANDLE}</p>
           <a class="btn btn-outline btn-block" target="_blank" rel="noopener" href="${INSTAGRAM_URL}">${IG_ICON} Seguir en Instagram</a>
