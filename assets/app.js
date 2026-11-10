@@ -21,7 +21,8 @@ function waLink(message){
 }
 
 function waProductLink(p){
-  return waLink(`Hola, estoy interesado en el producto ${p.modelo} (${p.marca}) de Humo Latino. Quisiera conocer disponibilidad y realizar una consulta.`);
+  const prodUrl = `${location.origin}${location.pathname}#/producto/${p.cod}`;
+  return waLink(`Hola, estoy interesado en el producto ${p.modelo} (${p.marca}) de Humo Latino:\n${prodUrl}\n\nQuisiera conocer disponibilidad y realizar una consulta.`);
 }
 
 function slugify(s){
@@ -64,6 +65,7 @@ const PRODUCT_IMAGES = {
   "7332": "https://superaudio.com.co/wp-content/uploads/2024/10/PL621UV-PRODJLIGHTING-BARRALED-1-1.jpg",
   "8496": "https://superaudio.com.co/wp-content/uploads/2025/02/PL25A-WP-20.webp",
   "8497": "https://superaudio.com.co/wp-content/uploads/2025/02/PAR46-WP-6.webp",
+  "7991": "https://superaudio.com.co/wp-content/uploads/2026/02/PAR-LED-LUZ-PL1810-PRODJ-LIGHTING-4.webp",
   "8067": "https://centrodelsonido.net/wp-content/uploads/2026/02/l002b-1-1.webp",
   "10641": "https://superaudio.com.co/wp-content/uploads/2026/06/LF105-PANELLEDRGB-BIGDIPPER-9.webp",
   "8833": "https://superaudio.com.co/wp-content/uploads/2026/02/L1015-BIGDIPPER-BARRAMOVIL-4.webp",
@@ -89,13 +91,19 @@ const PIN_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
 const SEARCH_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21 l-4.3-4.3"/></svg>`;
 const ARROW_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14 M13 6l6 6-6 6"/></svg>`;
 
+function escapeAttr(s){
+  return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 /* ---------- Rendering: shared bits ---------- */
 function productMedia(p, sizeClass){
   const img = PRODUCT_IMAGES[String(p.cod)];
+  const icon = categoryIcon(p.categoria_slug);
+  const fallback = `<div class="media-fallback" style="${img ? 'display:none;' : 'display:flex;'}width:100%;height:100%;align-items:center;justify-content:center;">${icon}</div>`;
   if(img){
-    return `<img src="${img}" alt="${p.modelo} ${p.marca}" loading="lazy" style="width:100%;height:100%;object-fit:contain;padding:${sizeClass==='pd'?'28px':'14px'};">`;
+    return `<img src="${img}" alt="${escapeAttr(p.modelo)} ${escapeAttr(p.marca)}" loading="lazy" style="width:100%;height:100%;object-fit:contain;padding:${sizeClass==='pd'?'28px':'14px'};" onerror="this.style.display='none';if(this.nextElementSibling)this.nextElementSibling.style.display='flex';">${fallback}`;
   }
-  return categoryIcon(p.categoria_slug);
+  return fallback;
 }
 
 function productCard(p){
@@ -421,7 +429,7 @@ function view_catalogo(params){
         <div class="toolbar">
           <div class="search-box" style="display:flex;">
             ${SEARCH_ICON}
-            <input id="catalog-search" type="text" placeholder="Buscar por nombre, marca o referencia..." value="${q}">
+            <input id="catalog-search" type="text" placeholder="Buscar por nombre, marca o referencia..." value="${escapeAttr(q)}">
           </div>
           <select id="filter-categoria" class="select-field">
             <option value="">Todas las categorías</option>
@@ -720,7 +728,7 @@ function contactSectionHTML(standalone){
           <a class="btn btn-whatsapp btn-block" style="margin-top:20px;" target="_blank" rel="noopener" href="${waLink('Hola, estoy interesado en el catálogo de Humo Latino. Quisiera conocer disponibilidad y realizar una consulta.')}">${WA_ICON} Hablar por WhatsApp</a>
         </div>
         <div class="qr-card">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=6&data=${encodeURIComponent(INSTAGRAM_URL)}" alt="Código QR Instagram Humo Latino" loading="lazy">
+          <img src="assets/qr-instagram.png" alt="Código QR Instagram Humo Latino" loading="lazy" style="border-radius:8px;background:#fff;padding:6px;width:180px;height:180px;margin:0 auto 14px;object-fit:contain;display:block;">
           <strong style="font-family:var(--font-display);font-size:16px;">Síguenos en Instagram</strong>
           <p>Escanea el código o toca el botón para llegar directo a ${IG_HANDLE}</p>
           <a class="btn btn-outline btn-block" target="_blank" rel="noopener" href="${INSTAGRAM_URL}">${IG_ICON} Seguir en Instagram</a>

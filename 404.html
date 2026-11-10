@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Humo Latino · Redirigiendo...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // GitHub Pages SPA router fallback:
+    // Si el usuario entra a /humo-latino-web/catalogo o /humo-latino-web/producto/123 sin el "#"
+    // redirigir automáticamente a /humo-latino-web/#/catalogo o /humo-latino-web/#/producto/123
+    (function(){
+      var path = window.location.pathname;
+      var repo = "/humo-latino-web";
+      if (path.indexOf(repo) === 0) {
+        var sub = path.slice(repo.length);
+        if (sub.charAt(0) !== "/") sub = "/" + sub;
+        var target = repo + "/#" + sub + window.location.search + window.location.hash;
+        window.location.replace(target);
+      } else {
+        window.location.replace("/humo-latino-web/");
+      }
+    })();
+  </script>
+</head>
+<body style="background:#0b0c0e;color:#f2efe9;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
+  <p>Cargando Humo Latino...</p>
+</body>
+</html>
