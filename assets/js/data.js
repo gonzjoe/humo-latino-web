@@ -95,7 +95,7 @@ const PRODUCTS = [
       "Distancia de proyeccion: 10 metros",
       "Dimensiones: 23.5×20.5×17.2CM"
     ],
-    "precio": 415000
+    "precio": 420000
   },
   {
     "cod": 6090,
@@ -295,7 +295,7 @@ const PRODUCTS = [
       "Dimensiones: 60 X 31 X 63.5 CM",
       "Peso: 2,56kg"
     ],
-    "precio": 325000
+    "precio": 320000
   },
   {
     "cod": 5656,
@@ -393,7 +393,7 @@ const PRODUCTS = [
       "Número de canales DMX: 7/13",
       "Dimensiones del producto: 27,9 x 16 x 12,5 cm"
     ],
-    "precio": 185000
+    "precio": 180000
   },
   {
     "cod": 8067,
@@ -410,7 +410,7 @@ const PRODUCTS = [
       "Incluye parlante de 5W",
       "Alimentación: DC5V 1.5A, batería de 600mA"
     ],
-    "precio": 65000
+    "precio": 60000
   },
   {
     "cod": 10576,
@@ -723,7 +723,7 @@ const PRODUCTS = [
       "Salida del humo: 18000 pies cúbicos / minuto",
       "Control: con cable y remoto"
     ],
-    "precio": 230000
+    "precio": 225000
   },
   {
     "cod": 4183,
