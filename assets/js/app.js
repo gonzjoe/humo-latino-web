@@ -33,44 +33,25 @@ function findProduct(cod){
   return PRODUCTS.find(p => String(p.cod) === String(cod));
 }
 
-/* ---------- Fotos reales verificadas (COD -> URL del distribuidor oficial) ---------- */
+/* ---------- Fotos de productos (prioridad local en assets/img/) ---------- */
+const LOCAL_IMAGE_CODES = new Set([
+  "10576", "10641", "1225", "1226", "4182", "4183", "4439", "5317", "5621", "5656",
+  "6090", "7145", "7146", "7300", "7332", "7334", "7691", "7963", "798", "7985",
+  "7991", "8067", "8136", "8172", "8177", "8234", "8236", "8237", "8496", "8497",
+  "8777", "8778", "8833", "8971", "8974"
+]);
+
+function getProductImageUrl(cod){
+  const sCod = String(cod);
+  if(LOCAL_IMAGE_CODES.has(sCod)){
+    return `assets/img/${sCod}.webp`;
+  }
+  return PRODUCT_IMAGES[sCod] || "";
+}
+
+/* Fallback a URLs externas si aún no están locales */
 const PRODUCT_IMAGES = {
-  "7963": "https://superaudio.com.co/wp-content/uploads/2024/11/LASER-LUZ-PL5000-RGB-PRODJ-LIGHTING-2.webp",
-  "8777": "https://superaudio.com.co/wp-content/uploads/2025/11/PL1000RGB-PRODJ-LIGHTING-LASER-1.webp",
-  "8778": "https://superaudio.com.co/wp-content/uploads/2025/11/PL500-RGB-PRODJLIGHTING-LASER-PNG1.png",
-  "6090": "https://superaudio.com.co/wp-content/uploads/2024/10/PL27RGB-PRODJLIGHTING-LASER-1-1.jpg",
-  "8172": "https://audiocustom.com.co/wp-content/uploads/2026/03/LB150-01.jpg",
-  "7146": "https://superaudio.com.co/wp-content/uploads/2022/05/LM70S-BIGDIPPER-CABEZAMOVIL-PNG1.png",
-  "8136": "https://superaudio.com.co/wp-content/uploads/2025/02/PS460-3.webp",
-  "8234": "https://superaudio.com.co/wp-content/uploads/2024/11/CABEZA-MOVIL-PL425-LASER-PRODJ-LIGHTING-8.webp",
-  "7300": "https://superaudio.com.co/wp-content/uploads/2024/10/LP009N-BIGDIPPER-PARLED-1-1.jpg",
-  "798": "https://superaudio.com.co/wp-content/uploads/2024/10/LP005-BIGDIPPER-PARLED-1-1.jpg",
-  "8177": "https://superaudio.com.co/wp-content/uploads/2024/11/LPC010-BIGDIPPER-PARLED-1.webp",
-  "1226": "https://superaudio.com.co/wp-content/uploads/2024/11/PAR-LED-LUZ-LPC007-BIGDIPPER-3.webp",
-  "1225": "https://superaudio.com.co/wp-content/uploads/2024/10/LPC006-BIGDIPPER-PAR-LED-PNG1.png",
-  "5656": "https://superaudio.com.co/wp-content/uploads/2024/10/5656-1.png",
-  "7985": "https://superaudio.com.co/wp-content/uploads/2024/11/PAR-LED-LUZ-PL006-PRODJ-LIGHTING-1.webp",
-  "7145": "https://superaudio.com.co/wp-content/uploads/2024/10/LM30A-BIG-DIPPER-CABEZA-MOVIL-PNG1.png",
-  "8236": "https://superaudio.com.co/wp-content/uploads/2024/11/BLINDER-LUZ-PL2200-BLINDER-PRODJ-LIGHTING-1.webp",
-  "8237": "https://superaudio.com.co/wp-content/uploads/2024/11/BLINDER-LUZ-PL4400-BLINDER-PRODJ-LIGHTING-3.webp",
-  "5621": "https://superaudio.com.co/wp-content/uploads/2024/10/LC001H-BARNDOOR-BIGDIPPER-BARNDOOR-1.webp",
-  "5317": "https://superaudio.com.co/wp-content/uploads/2024/10/PL243WASHER-PRODJLIGHTING-BARRALED-1-1.jpg",
-  "7691": "https://ccmtiendadelsonido.com/wp-content/uploads/2026/05/IMG_1954.jpg",
-  "5319": "https://superaudio.com.co/wp-content/uploads/2024/10/maquina-de-humo-con-6-leds-3w-rgb-3-en-1-prodj-f900up-led.png",
-  "8974": "https://superaudio.com.co/wp-content/uploads/2025/12/FOG900LED-MAQUINADEHUMO-PRODJ-1.webp",
-  "4439": "https://superaudio.com.co/wp-content/uploads/2024/10/F900-PRODJ-MAQUINADEHUMO-1-1.jpg",
-  "4182": "https://ccmtiendadelsonido.com/wp-content/uploads/2026/05/10633-1.jpg",
-  "8971": "https://superaudio.com.co/wp-content/uploads/2025/12/FOG900-CAMARA-DE-HUMO-PRODJ-1.png",
-  "4183": "https://superaudio.com.co/wp-content/uploads/2024/10/F-BUBBLE-PRODJLIGHTING-MAQUINABURBUJA-1-1.jpg",
-  "7332": "https://superaudio.com.co/wp-content/uploads/2024/10/PL621UV-PRODJLIGHTING-BARRALED-1-1.jpg",
-  "8496": "https://superaudio.com.co/wp-content/uploads/2025/02/PL25A-WP-20.webp",
-  "8497": "https://superaudio.com.co/wp-content/uploads/2025/02/PAR46-WP-6.webp",
-  "7991": "https://superaudio.com.co/wp-content/uploads/2026/02/PAR-LED-LUZ-PL1810-PRODJ-LIGHTING-4.webp",
-  "8067": "https://centrodelsonido.net/wp-content/uploads/2026/02/l002b-1-1.webp",
-  "10641": "https://superaudio.com.co/wp-content/uploads/2026/06/LF105-PANELLEDRGB-BIGDIPPER-9.webp",
-  "8833": "https://superaudio.com.co/wp-content/uploads/2026/02/L1015-BIGDIPPER-BARRAMOVIL-4.webp",
-  "10576": "https://superaudio.com.co/wp-content/uploads/2026/02/PL415PARTY-PRODJ-LIGHTING-CABEZAMOVIL-1.webp",
-  "7334": "https://superaudio.com.co/wp-content/uploads/2024/10/PL49PARTY-PRODJLIGHTING-LUZTODOENUNO-1-1.jpg"
+  "5319": "https://superaudio.com.co/wp-content/uploads/2024/10/maquina-de-humo-con-6-leds-3w-rgb-3-en-1-prodj-f900up-led.png"
 };
 
 /* ---------- Category icons (esquemas propios, no fotografías) ---------- */
@@ -97,7 +78,7 @@ function escapeAttr(s){
 
 /* ---------- Rendering: shared bits ---------- */
 function productMedia(p, sizeClass){
-  const img = PRODUCT_IMAGES[String(p.cod)];
+  const img = getProductImageUrl(p.cod);
   const icon = categoryIcon(p.categoria_slug);
   const fallback = `<div class="media-fallback" style="${img ? 'display:none;' : 'display:flex;'}width:100%;height:100%;align-items:center;justify-content:center;">${icon}</div>`;
   if(img){
