@@ -297,7 +297,7 @@ function initHeroFx(canvas){
 }
 
 function view_home(){
-  const featuredCods = [7963, 8172, 10576, 8974, 8833, 8497];
+  const featuredCods = [7963, 8172, 10576, 8974, 8833, 8497, 8237, 8136];
   const featured = featuredCods.map(findProduct).filter(Boolean);
   const catEntries = Object.entries(CATEGORIES);
   const totalProducts = PRODUCTS.length;
