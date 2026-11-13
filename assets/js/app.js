@@ -33,26 +33,12 @@ function findProduct(cod){
   return PRODUCTS.find(p => String(p.cod) === String(cod));
 }
 
-/* ---------- Fotos de productos (prioridad local en assets/img/) ---------- */
-const LOCAL_IMAGE_CODES = new Set([
-  "10576", "10641", "1225", "1226", "4182", "4183", "4439", "5317", "5621", "5656",
-  "6090", "7145", "7146", "7300", "7332", "7334", "7691", "7963", "798", "7985",
-  "7991", "8067", "8136", "8172", "8177", "8234", "8236", "8237", "8496", "8497",
-  "8777", "8778", "8833", "8971", "8974"
-]);
-
+/* ---------- Fotos de productos (100% locales en assets/img/) ---------- */
 function getProductImageUrl(cod){
-  const sCod = String(cod);
-  if(LOCAL_IMAGE_CODES.has(sCod)){
-    return `assets/img/${sCod}.webp`;
-  }
-  return PRODUCT_IMAGES[sCod] || "";
+  return `assets/img/${cod}.webp`;
 }
 
-/* Fallback a URLs externas si aún no están locales */
-const PRODUCT_IMAGES = {
-  "5319": "https://superaudio.com.co/wp-content/uploads/2024/10/maquina-de-humo-con-6-leds-3w-rgb-3-en-1-prodj-f900up-led.png"
-};
+const PRODUCT_IMAGES = {};
 
 /* ---------- Category icons (esquemas propios, no fotografías) ---------- */
 const ICONS = {
