@@ -529,13 +529,18 @@ nav.main-nav a.active{ color: var(--text); background: var(--surface-2); }
   position: absolute;
   top: 10px; left: 10px;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: .06em;
-  color: var(--text-faint);
-  background: rgba(11,12,14,.65);
-  padding: 4px 8px;
+  color: #ffffff;
+  background: rgba(15, 17, 21, 0.90);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 4px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border-soft);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.40);
+  z-index: 2;
 }
 .product-body{
   padding: 16px;
