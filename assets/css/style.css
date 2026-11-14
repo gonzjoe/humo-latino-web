@@ -162,16 +162,21 @@ header.site-header{
 .header-inner{
   display: flex;
   align-items: center;
-  gap: 22px;
-  padding: 14px 0;
+  gap: 24px;
+  padding: 10px 0;
 }
 .brand-mark{
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-shrink: 0;
 }
-.brand-mark img{ height: 42px; width: auto; object-fit: contain; }
+.brand-mark img{
+  height: 58px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
 .brand-mark span{
   font-family: var(--font-mono);
   font-size: 10px;
