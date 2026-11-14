@@ -2,14 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/">
 <script>
-  (function(){
-    var isGh = window.location.pathname.indexOf('/humo-latino-web') === 0;
-    document.write('<base href="' + (isGh ? '/humo-latino-web/' : '/') + '">');
-  })();
+  if (window.location.pathname.indexOf('/humo-latino-web') === 0) {
+    document.querySelector('base').setAttribute('href', '/humo-latino-web/');
+  }
 </script>
-<noscript><base href="/"></noscript>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humo Latino · Iluminación, humo y efectos profesionales | Sin humo no hay luces</title>
 <meta name="description" content="Catálogo digital oficial de Humo Latino: iluminación profesional, láser, cabezas móviles, pares LED, blinders y máquinas de humo para eventos, escenarios y discotecas en Colombia. Más de 15 años en el mercado.">
 <meta name="keywords" content="Humo Latino, máquinas de humo, máquinas de humo Colombia, luces para eventos, iluminación profesional, luces para discotecas, máquinas de efectos, equipos para eventos, efectos especiales, cabezas móviles, láser DJ">
