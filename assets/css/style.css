@@ -172,7 +172,7 @@ header.site-header{
   flex-shrink: 0;
 }
 .brand-mark img{
-  height: 58px;
+  height: clamp(36px, 5vw, 56px);
   width: auto;
   object-fit: contain;
   display: block;
@@ -790,6 +790,8 @@ footer.site-footer{
 }
 
 @media (max-width: 720px){
+  .header-inner{ padding: 8px 0; }
+  .brand-mark img{ height: 38px; }
   .container{ padding: 0 18px; }
   nav.main-nav{ display: none; }
   .search-box{ display: none; }
@@ -811,6 +813,7 @@ footer.site-footer{
 }
 
 @media (max-width: 460px){
+  .brand-mark img{ height: 34px; }
   .product-grid{ grid-template-columns: 1fr 1fr; gap: 10px; }
   .product-body{ padding: 12px; }
   .product-body h4{ font-size: 13.5px; }
