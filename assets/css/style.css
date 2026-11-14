@@ -171,7 +171,7 @@ header.site-header{
   gap: 10px;
   flex-shrink: 0;
 }
-.brand-mark img{ height: 34px; width: auto; }
+.brand-mark img{ height: 42px; width: auto; object-fit: contain; }
 .brand-mark span{
   font-family: var(--font-mono);
   font-size: 10px;
@@ -700,7 +700,7 @@ footer.site-footer{
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 32px;
 }
-.footer-brand img{ height: 30px; margin-bottom: 14px; }
+.footer-brand img{ height: 42px; width: auto; object-fit: contain; margin-bottom: 14px; }
 .footer-brand p{ color: var(--text-muted); font-size: 13px; max-width: 280px; }
 .footer-col h5{
   font-family: var(--font-mono);
@@ -759,7 +759,7 @@ footer.site-footer{
 }
 .mobile-menu.open{ display: flex; }
 .mobile-menu-head{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.mobile-menu-head img{ height: 30px; }
+.mobile-menu-head img{ height: 40px; width: auto; object-fit: contain; }
 .mobile-menu nav{ display: flex; flex-direction: column; gap: 4px; }
 .mobile-menu nav a{ padding: 15px 4px; font-family: var(--font-display); font-size: 20px; border-bottom: 1px solid var(--border-soft); }
 .mobile-menu .btn{ margin-top: 24px; }
