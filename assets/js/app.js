@@ -21,7 +21,7 @@ function waLink(message){
 }
 
 function waProductLink(p){
-  const prodUrl = `${location.origin}${location.pathname}#/producto/${p.cod}`;
+  const prodUrl = `${location.origin}/producto/${p.cod}`;
   return waLink(`Hola, estoy interesado en el producto ${p.modelo} (${p.marca}) de Humo Latino:\n${prodUrl}\n\nQuisiera conocer disponibilidad y realizar una consulta.`);
 }
 
@@ -75,7 +75,7 @@ function productMedia(p, sizeClass){
 
 function productCard(p){
   return `
-  <a class="product-card" href="#/producto/${p.cod}" data-cod="${p.cod}">
+  <a class="product-card" href="/producto/${p.cod}" data-cod="${p.cod}">
     <div class="product-media">
       <span class="brand-tag">${p.marca}</span>
       ${productMedia(p, 'card')}
@@ -101,9 +101,10 @@ function renderGrid(container, list){
 }
 
 /* ---------- Header active state / mobile menu ---------- */
-function setActiveNav(hash){
+function setActiveNav(cleanPath){
   $$("nav.main-nav a").forEach(a=>{
-    a.classList.toggle("active", a.getAttribute("href") === hash || (hash.startsWith("#/categoria") && a.dataset.nav==="catalogo") || (hash.startsWith("#/producto") && a.dataset.nav==="catalogo"));
+    const href = a.getAttribute("href") || "";
+    a.classList.toggle("active", href === cleanPath || (cleanPath.startsWith("/categoria") && a.dataset.nav==="catalogo") || (cleanPath.startsWith("/producto") && a.dataset.nav==="catalogo"));
   });
 }
 
@@ -122,7 +123,7 @@ function initHeaderSearch(){
   if(!input) return;
   input.addEventListener("keydown", (e)=>{
     if(e.key === "Enter" && input.value.trim()){
-      location.hash = `#/catalogo?q=${encodeURIComponent(input.value.trim())}`;
+      navigateTo(`/catalogo?q=${encodeURIComponent(input.value.trim())}`);
     }
   });
 }
@@ -310,7 +311,7 @@ function view_home(){
     <div class="hero-center">
       <img class="hero-logo" src="assets/img/logo-hero.png" alt="Humo Latino">
       <div class="hero-ctas">
-        <a href="#/catalogo" class="btn btn-primary">Ver catálogo${ARROW_ICON}</a>
+        <a href="/catalogo" class="btn btn-primary">Ver catálogo${ARROW_ICON}</a>
         <a href="${waLink('Hola, quiero conocer más sobre los productos de Humo Latino.')}" target="_blank" rel="noopener" class="btn btn-whatsapp">${WA_ICON} Hablar por WhatsApp</a>
       </div>
     </div>
@@ -335,7 +336,7 @@ function view_home(){
         <h2 style="font-size:32px;margin:14px 0 16px;">Iluminación, humo y efectos con más de 15 años de experiencia</h2>
         <p>Humo Latino provee equipos profesionales de iluminación, máquinas de humo y efectos especiales para eventos, escenarios, discotecas y producciones de entretenimiento. Nuestro catálogo reúne cabezas móviles, láser, pares LED, barras, blinders y generadores de humo de marcas reconocidas en el mercano profesional.</p>
         <p>Cada producto en este catálogo cuenta con ficha técnica real, precio claro y contacto directo por WhatsApp para resolver tu compra sin vueltas.</p>
-        <a href="#/catalogo" class="btn btn-outline" style="margin-top:6px;">Explorar catálogo completo${ARROW_ICON}</a>
+        <a href="/catalogo" class="btn btn-outline" style="margin-top:6px;">Explorar catálogo completo${ARROW_ICON}</a>
       </div>
     </div>
   </section>
@@ -349,7 +350,7 @@ function view_home(){
       <div class="cat-grid">
         ${catEntries.map(([slug, c])=>{
           const count = PRODUCTS.filter(p=>p.categoria_slug===slug).length;
-          return `<a class="cat-card" href="#/categoria/${slug}">
+          return `<a class="cat-card" href="/categoria/${slug}">
             <div class="cat-icon">${categoryIcon(slug)}</div>
             <div>
               <h3>${c.nombre}</h3>
@@ -369,7 +370,7 @@ function view_home(){
     <div class="container">
       <div class="section-head">
         <div><span class="eyebrow">Selección</span><h2>Productos destacados</h2></div>
-        <a href="#/catalogo" class="btn btn-outline btn-sm">Ver todo el catálogo</a>
+        <a href="/catalogo" class="btn btn-outline btn-sm">Ver todo el catálogo</a>
       </div>
       <div class="product-grid">${featured.map(productCard).join("")}</div>
     </div>
@@ -388,7 +389,7 @@ function view_catalogo(params){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / Catálogo</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / Catálogo</div>
         <div class="section-head" style="margin-bottom:20px;">
           <div><span class="eyebrow">Catálogo completo</span><h2>Todos los productos</h2></div>
         </div>
@@ -464,14 +465,14 @@ function view_categoria(slug){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / <a href="#/catalogo">Catálogo</a> / ${c.nombre}</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/catalogo">Catálogo</a> / ${c.nombre}</div>
         <div class="section-head">
           <div>
             <span class="eyebrow">Categoría</span>
             <h2>${c.nombre}</h2>
             <p>${c.desc}</p>
           </div>
-          <a href="#/catalogo" class="btn btn-outline btn-sm">Ver catálogo completo</a>
+          <a href="/catalogo" class="btn btn-outline btn-sm">Ver catálogo completo</a>
         </div>
         <div class="product-grid">${list.map(productCard).join("")}</div>
       </div>
@@ -486,14 +487,14 @@ function view_marca(slug){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / <a href="#/catalogo">Catálogo</a> / ${name}</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/catalogo">Catálogo</a> / ${name}</div>
         <div class="section-head">
           <div>
             <span class="eyebrow">Marca</span>
             <h2>${name}</h2>
             <p>${list.length} referencias disponibles de ${name} en el catálogo de Humo Latino.</p>
           </div>
-          <a href="#/catalogo" class="btn btn-outline btn-sm">Ver catálogo completo</a>
+          <a href="/catalogo" class="btn btn-outline btn-sm">Ver catálogo completo</a>
         </div>
         <div class="product-grid">${list.map(productCard).join("")}</div>
       </div>
@@ -509,7 +510,7 @@ function view_producto(cod){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / <a href="#/catalogo">Catálogo</a> / <a href="#/categoria/${p.categoria_slug}">${p.categoria_nombre}</a> / ${p.modelo}</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / <a href="/catalogo">Catálogo</a> / <a href="/categoria/${p.categoria_slug}">${p.categoria_nombre}</a> / ${p.modelo}</div>
         <div class="pd-wrap">
           <div class="pd-media">${productMedia(p, 'pd')}</div>
           <div class="pd-info">
@@ -519,7 +520,7 @@ function view_producto(cod){
             <div class="pd-price"><span>Precio público</span>${cop(p.precio)}</div>
             <div class="pd-cta">
               <a class="btn btn-whatsapp" target="_blank" rel="noopener" href="${waProductLink(p)}">${WA_ICON} Consultar por WhatsApp</a>
-              <a class="btn btn-outline" href="#/categoria/${p.categoria_slug}">Ver más de ${p.categoria_nombre}</a>
+              <a class="btn btn-outline" href="/categoria/${p.categoria_slug}">Ver más de ${p.categoria_nombre}</a>
             </div>
 
             <div class="pd-section">
@@ -576,14 +577,14 @@ function view_categorias(){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / Categorías</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / Categorías</div>
         <div class="section-head">
           <div><span class="eyebrow">Explora por categoría</span><h2>Todas las categorías</h2></div>
         </div>
         <div class="cat-grid">
           ${catEntries.map(([slug, c])=>{
             const count = PRODUCTS.filter(p=>p.categoria_slug===slug).length;
-            return `<a class="cat-card" href="#/categoria/${slug}">
+            return `<a class="cat-card" href="/categoria/${slug}">
               <div class="cat-icon">${categoryIcon(slug)}</div>
               <div><h3>${c.nombre}</h3><p>${c.desc}</p></div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -603,14 +604,14 @@ function view_marcas(){
   app.innerHTML = `
     <div class="section section-tight">
       <div class="container">
-        <div class="breadcrumb"><a href="#/">Inicio</a> / Marcas</div>
+        <div class="breadcrumb"><a href="/">Inicio</a> / Marcas</div>
         <div class="section-head">
           <div><span class="eyebrow">Explora por marca</span><h2>Todas las marcas</h2></div>
         </div>
         <div class="cat-grid">
           ${brandEntries.map(([slug, name])=>{
             const count = PRODUCTS.filter(p=>p.marca_slug===slug).length;
-            return `<a class="cat-card" href="#/marca/${slug}">
+            return `<a class="cat-card" href="/marca/${slug}">
               <div class="cat-icon">${ICONS.efectos}</div>
               <div><h3>${name}</h3><p>Equipos profesionales de iluminación y efectos.</p></div>
               <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -635,7 +636,7 @@ function view_nosotros(){
         <h2 style="font-size:32px;margin:14px 0 16px;">Más de 15 años dando luz a los eventos</h2>
         <p>Humo Latino provee equipos profesionales de iluminación, máquinas de humo y efectos especiales para eventos, escenarios, discotecas y producciones de entretenimiento.</p>
         <p>Trabajamos con marcas especializadas del sector para ofrecer un catálogo amplio, organizado y en constante crecimiento, siempre con atención directa y personalizada por WhatsApp.</p>
-        <a href="#/catalogo" class="btn btn-primary" style="margin-top:6px;">Ver catálogo${ARROW_ICON}</a>
+        <a href="/catalogo" class="btn btn-primary" style="margin-top:6px;">Ver catálogo${ARROW_ICON}</a>
       </div>
     </div>
   </div>
@@ -664,7 +665,7 @@ function view_404(){
         <span class="eyebrow">404</span>
         <h2 style="margin-top:14px;">No encontramos esa página</h2>
         <p style="color:var(--text-muted);margin:14px 0 26px;">El producto o la sección que buscas no está disponible.</p>
-        <a href="#/catalogo" class="btn btn-primary">Ir al catálogo</a>
+        <a href="/catalogo" class="btn btn-primary">Ir al catálogo</a>
       </div>
     </div>
   `;
@@ -705,15 +706,32 @@ function contactSectionHTML(standalone){
   </section>`;
 }
 
-/* ---------- Router ---------- */
+/* ---------- Router (URLs limpias con fallback a hash) ---------- */
+function getRouteInfo(){
+  // Si viene con hash (#/contacto) redirigir transparentemente a URL limpia
+  if(location.hash && location.hash.startsWith("#/")){
+    const cleanFromHash = location.hash.slice(1);
+    history.replaceState(null, "", cleanFromHash);
+  }
+
+  let pathname = location.pathname || "/";
+  // Si estamos en un subdirectorio como /humo-latino-web/
+  if(pathname.startsWith("/humo-latino-web")){
+    pathname = pathname.slice("/humo-latino-web".length) || "/";
+  }
+
+  const queryStr = location.search ? location.search.slice(1) : "";
+  const params = new URLSearchParams(queryStr);
+  const segs = pathname.split("/").filter(Boolean);
+
+  return { pathname, segs, params };
+}
+
 function router(){
-  const raw = location.hash.slice(1) || "/";
-  const [path, queryStr] = raw.split("?");
-  const params = new URLSearchParams(queryStr || "");
-  const segs = path.split("/").filter(Boolean);
+  const { pathname, segs, params } = getRouteInfo();
 
   window.scrollTo({top:0, behavior:"instant"});
-  setActiveNav("#/" + (segs[0] || ""));
+  setActiveNav("/" + (segs[0] || ""));
 
   if(segs.length === 0){ view_home(); return; }
   if(segs[0] === "catalogo"){ view_catalogo(params); return; }
@@ -727,9 +745,31 @@ function router(){
   view_404();
 }
 
-window.addEventListener("hashchange", router);
+function navigateTo(url){
+  history.pushState(null, "", url);
+  router();
+}
+
+// Interceptar clics en enlaces internos para navegación instantánea sin recarga
+function initLinkInterceptor(){
+  document.addEventListener("click", (e)=>{
+    const a = e.target.closest("a");
+    if(!a) return;
+    const href = a.getAttribute("href");
+    if(!href) return;
+
+    // Solo interceptar enlaces internos que inicien con / y no sean externos ni anclas
+    if(href.startsWith("/") && !href.startsWith("//") && !a.target && !a.hasAttribute("download")){
+      e.preventDefault();
+      navigateTo(href);
+    }
+  });
+}
+
+window.addEventListener("popstate", router);
 window.addEventListener("DOMContentLoaded", ()=>{
   initMobileMenu();
   initHeaderSearch();
+  initLinkInterceptor();
   router();
 });

@@ -1,15 +1,22 @@
 # 1. Desactivar listado de directorios
 Options -Indexes
 
-# 2. Forzar HTTPS (seguridad y certificado SSL)
+# 2. Reescritura para URLs limpias (SPA) y forzado de HTTPS
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Forzar HTTPS (seguridad y certificado SSL)
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Si la petición no es un archivo ni un directorio existente, cargar index.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
 </IfModule>
 
 # 3. Redirección de errores 404
-ErrorDocument 404 /404.html
+ErrorDocument 404 /index.html
 
 # 4. Compresión Gzip (reduce el tamaño de descarga de CSS y JS)
 <IfModule mod_deflate.c>
