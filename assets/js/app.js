@@ -59,6 +59,12 @@ const ICONS = {
   blinder: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="18" width="40" height="26" rx="3"/><path d="M20 18 v26 M28 18 v26 M36 18 v26 M44 18 v26"/><path d="M12 50 h40"/></svg>`,
   "barras-led-paneles": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="28" width="48" height="8" rx="3"/><circle cx="16" cy="32" r="1.6" fill="currentColor" stroke="none"/><circle cx="24" cy="32" r="1.6" fill="currentColor" stroke="none"/><circle cx="32" cy="32" r="1.6" fill="currentColor" stroke="none"/><circle cx="40" cy="32" r="1.6" fill="currentColor" stroke="none"/><circle cx="48" cy="32" r="1.6" fill="currentColor" stroke="none"/><path d="M12 22 v-6 M52 22 v-6 M12 48 v6 M52 48 v6"/></svg>`,
   "maquinas-de-humo-y-burbujas": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="30" width="30" height="16" rx="3"/><path d="M44 34 h6 v8 h-6 z"/><path d="M20 30 v-6 h12 v6"/><path d="M10 14 c3 3 -3 5 0 8 M18 10 c3 3 -3 5 0 8 M26 14 c3 3 -3 5 0 8" stroke-opacity=".55"/></svg>`,
+  "controladores-dmx": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="14" width="44" height="36" rx="4"/><line x1="22" y1="22" x2="22" y2="42"/><line x1="32" y1="22" x2="32" y2="42"/><line x1="42" y1="22" x2="42" y2="42"/><circle cx="22" cy="28" r="3" fill="currentColor"/><circle cx="32" cy="36" r="3" fill="currentColor"/><circle cx="42" cy="26" r="3" fill="currentColor"/></svg>`,
+  "equipos-dj": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="32" r="14"/><circle cx="24" cy="32" r="5"/><circle cx="24" cy="32" r="1.5" fill="currentColor"/><rect x="42" y="18" width="14" height="28" rx="3"/><line x1="49" y1="24" x2="49" y2="38"/><circle cx="49" cy="30" r="2.5" fill="currentColor"/></svg>`,
+  "cabinas-y-bajos": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="10" width="32" height="44" rx="4"/><circle cx="32" cy="22" r="4"/><circle cx="32" cy="38" r="9"/><circle cx="32" cy="38" r="3.5"/></svg>`,
+  "amplificadores-y-potencias": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="20" width="48" height="24" rx="3"/><circle cx="18" cy="32" r="4"/><circle cx="46" cy="32" r="4"/><line x1="26" y1="28" x2="38" y2="28"/><line x1="26" y1="32" x2="38" y2="32"/><line x1="26" y1="36" x2="38" y2="36"/></svg>`,
+  "microfonos": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="10" width="16" height="24" rx="8"/><path d="M18 26 v6 a14 14 0 0 0 28 0 v-6"/><line x1="32" y1="46" x2="32" y2="54"/><line x1="22" y1="54" x2="42" y2="54"/></svg>`,
+  "accesorios-y-bases": `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="32" y1="12" x2="32" y2="44"/><line x1="32" y1="44" x2="16" y2="54"/><line x1="32" y1="44" x2="48" y2="54"/><circle cx="32" cy="12" r="4"/><line x1="24" y1="26" x2="40" y2="26"/></svg>`,
 };
 function categoryIcon(slug){ return ICONS[slug] || ICONS.efectos; }
 
@@ -578,6 +584,12 @@ function applicationTags(catSlug){
     blinder: ["Conciertos","Momentos climáticos","TV y video"],
     "barras-led-paneles": ["Fondos de escenario","Washes de color","Discotecas"],
     "maquinas-de-humo-y-burbujas": ["Conciertos","Discotecas","Fiestas infantiles","Producciones audiovisuales"],
+    "controladores-dmx": ["Shows de luces", "Escenarios", "Discotecas", "Eventos"],
+    "equipos-dj": ["Clubes", "Festivales", "DJs profesionales", "Estudios"],
+    "cabinas-y-bajos": ["Conciertos", "Eventos en vivo", "Discotecas", "Iglesias"],
+    "amplificadores-y-potencias": ["Sistemas de touring", "Grandes escenarios", "Instalaciones fijas"],
+    "microfonos": ["Transmisiones", "Podcasts", "Conferencias", "Grabación en vivo"],
+    "accesorios-y-bases": ["Montajes", "Cabinas de DJ", "Tarimas"],
   };
   return map[catSlug] || ["Eventos","Escenarios"];
 }
