@@ -413,8 +413,9 @@ nav.main-nav a.active{ color: var(--text); background: var(--surface-2); }
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 220px;
 }
-.about-wrap .logo-big img{ width: 100%; max-width: 260px; }
+.about-wrap .logo-big img{ width: 100%; max-width: 340px; height: auto; object-fit: contain; }
 
 /* ===== Category grid ===== */
 .cat-grid{

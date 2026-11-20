@@ -349,7 +349,7 @@ function view_home(){
 
   <section class="section" style="padding-top:0">
     <div class="container about-wrap">
-      <div class="logo-big"><img src="${getBasePath()}assets/img/logo-humo-latino.png?v=2" alt="Logotipo oficial Humo Latino · Más de 15 años en el mercado" title="Humo Latino · Sin humo no hay luces"></div>
+      <div class="logo-big"><img src="${getBasePath()}assets/img/logo-nav.png?v=3" alt="Logotipo oficial Humo Latino · Más de 15 años en el mercado" title="Humo Latino · Sin humo no hay luces"></div>
       <div>
         <span class="eyebrow">Humo Latino</span>
         <h2 style="font-size:32px;margin:14px 0 16px;">Iluminación, humo y efectos con más de 15 años de experiencia</h2>
@@ -655,7 +655,7 @@ function view_nosotros(){
   app.innerHTML = `
   <div class="section">
     <div class="container about-wrap">
-      <div class="logo-big"><img src="${getBasePath()}assets/img/logo-humo-latino.png?v=2" alt="Logotipo oficial Humo Latino · Más de 15 años en el mercado" title="Humo Latino · Sin humo no hay luces"></div>
+      <div class="logo-big"><img src="${getBasePath()}assets/img/logo-nav.png?v=3" alt="Logotipo oficial Humo Latino · Más de 15 años en el mercado" title="Humo Latino · Sin humo no hay luces"></div>
       <div>
         <span class="eyebrow">Nosotros</span>
         <h2 style="font-size:32px;margin:14px 0 16px;">Más de 15 años dando luz a los eventos</h2>
